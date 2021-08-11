@@ -36,13 +36,13 @@ Run the following steps
 * Convert the XML file into a tsv file with one article per line:
   * `python Preprocessing/xml2line.py -A data/articles-training-byarticle-20181122.xml -T data/ground-truth-training-byarticle-20181122.xml -F article_sent,title_sent work/train.text.tsv`
 * Convert the tsv file containing text into a tsv file containing elmo embeddings:
-  * If you have a GPU: `python Preprocessing/line2elmo2.py -g -l 100  work/train.text.tsv work/train.elmo.tsv`
+  * If you have a GPU: `python3 Preprocessing/line2bert2.py -g -l 100 work/train.text.tsv work/train_bert_lar_ling.tsv`
   * Otherwise: `python Preprocessing/line2elmo2.py -l 100 work/train.text.tsv work/train.elmo.tsv`
   If you get problems with the GPU memory or RAM, use the -b option to reduce the batch size
 * Make sure the directory `saved_models` does not contain any model files from previous runs:
   * `rm saved_models/*.hdf5`
 * Train the actual model: 
-  `python CNN_elmo.py work/train.elmo.tsv`
+  `python CNN_elmo.py work/train_bert_lar_ling.tsv`
   This will create a number of model files in the `saved_models` directory. The file names contain the validation accuracy.
 
 
