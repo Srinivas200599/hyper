@@ -29,6 +29,7 @@ def load_elmo(path, max_len=200):
             gzip_id = gzip_fields[0]
             gzip_label = gzip_fields[1]
             elmo_embd_str = gzip_fields[4].strip()
+            #lis = (elmo_embd_str.replace("NaN", "0"))
             elmo_embd_list = ast.literal_eval(elmo_embd_str)
             elmo_embd_array = np.array(elmo_embd_list)
             padded_seq = sequence.pad_sequences([elmo_embd_array], maxlen=max_len, dtype='float32')[0]
@@ -134,7 +135,7 @@ args = parser.parse_args()
 
 seed = 7
 max_len = 200
-embed_size = 1024
+embed_size = 768
 
 x_data, y_data, ids = load_elmo(args.inputTSV, max_len=max_len)
 
